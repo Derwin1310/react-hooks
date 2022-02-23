@@ -14,5 +14,15 @@ p {
 }
 
 .complete {
-    text-decoration: line-through;
+	text-decoration: line-through;
+}
+
+.todo-title {
+	border-bottom: 1px solid lightGrey;
+	padding-bottom: 1rem;
+	margin-bottom: 1rem;
+}
+
+.fake-input {
+	border: 0;
 }

@@ -1,25 +1,21 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { useForm } from '../../../hooks/useForm';
 
-//Este componente es la otra parte del componente padre TodoApp.js donde trabajamos la parte del imput y el boton de submit que se manejaban en un mismo div en dicho componente.
+export const TodoAdd = ({ handleAddTodo }) => {
+	const [{ description }, handleInputChange, reset] = useForm({ description: '' });
 
-//Dado que este componente utiliza el handleSubmit, lo traemos para aca mismamente pero con la propiedad de handleAddTodo que es la funcion que tenemos para sumar en el componente padre, asi como el preventDefault y la condicion para que si el input esta vacio o es igual a 1 no se envie nada.
-
-//Tambien nos traemois el useForm que ya que lo utilizamos mismamente en esta parte del input.
-export const TodoAdd = ({handleAddTodo}) => {
-    const [{description}, handleInputChange, reset] = useForm({
-		description: '',
-	});
-
-    const handleSubmit = e => {
+	const handleSubmit = e => {
 		e.preventDefault();
 
 		if (description.trim().length <= 1) return;
+
+		const consecutive = JSON.parse(localStorage.getItem('todos')).length + 1
 
 		const newTodo = {
 			id: new Date().getTime(),
 			desc: description,
 			done: false,
+			consecutive: consecutive
 		};
 
 		handleAddTodo(newTodo)
@@ -27,9 +23,8 @@ export const TodoAdd = ({handleAddTodo}) => {
 	};
 
 	return (
-		<>
-			<h4>Add TODO</h4>
-			<hr />
+		<Fragment>
+			<h4 className='todo-title'>Add TODO</h4>
 
 			<form onSubmit={handleSubmit}>
 				<input
@@ -41,13 +36,21 @@ export const TodoAdd = ({handleAddTodo}) => {
 					autoComplete='off'
 					onChange={handleInputChange}
 				/>
-				<button
-					type='submit'
-					className='btn btn-outline-primary mt-1 btn-block'
-				>
-					Add
+				<div className='flex justify-between mt3' style={{gap: "0.5rem"}}>
+					<button type='submit' className='w-100 btn btn-outline-primary mt-1 btn-block'>
+						Add
+					</button>
+					<button className='w-100 btn btn-outline-primary mt-1 btn-block'>
+						Transform
+					</button>
+					<button className='w-100 btn btn-outline-primary mt-1 btn-block'>
+						Elipsis
+					</button>
+				</div>
+				<button className='w-100 btn btn-outline-primary mt-1 btn-block'>
+					{false ? "Rock Style" : "Nerd Style"}
 				</button>
 			</form>
-		</>
+		</Fragment>
 	);
 };
