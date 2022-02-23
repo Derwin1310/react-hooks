@@ -50,6 +50,11 @@ export const TodoAdd = ({ handleAddTodo }) => {
 				<button className='w-100 btn btn-outline-primary mt-1 btn-block'>
 					{false ? "Rock Style" : "Nerd Style"}
 				</button>
+				<button
+					className='btn btn-outline-primary mt-1 btn-block'
+				>
+					Elipse
+				</button>
 			</form>
 		</Fragment>
 	);
